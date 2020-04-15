@@ -16,4 +16,5 @@ Route::group([
     Route::post('/migrations', 'InstallDatabaseController@makeMigrations');
     Route::get('/keys', 'InstallKeysController@index')->name('install.keys');
     Route::post('/keys', 'InstallKeysController@setKeys');
+    Route::get('/finish', 'InstallIndexController@finish')->name('install.finish');
 });
