@@ -39,7 +39,11 @@ class InstallKeysController extends Controller
     public function setKeys()
     {
         try {
-            Artisan::call('key:generate');
+            Artisan::call('key:generate', ['--force' => true, '--show' => true]);
+            if (empty(DotenvEditor::getValue('APP_KEY'))) {
+                DotenvEditor::setKey('APP_KEY', trim(str_replace('"', '', Artisan::output())));
+                DotenvEditor::save();
+            }
             Artisan::call('jwt:secret', ['--always-no' => true]);
             Artisan::call('storage:link');
             if (empty(DotenvEditor::getValue('APP_KEY')) || empty(DotenvEditor::getValue('JWT_SECRET'))) {
