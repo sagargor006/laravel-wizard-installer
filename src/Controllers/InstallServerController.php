@@ -22,7 +22,7 @@ class InstallServerController extends Controller
     /**
      * Check requirements
      *
-     * @return array[]
+     * @return array
      */
     public function check()
     {

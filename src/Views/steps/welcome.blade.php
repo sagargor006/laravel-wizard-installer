@@ -2,8 +2,10 @@
 
 @section('step')
     <p>
-        @lang('Welcome to the installation wizard. Before getting started, we need some information on the database').
-        @lang('You will need to know the following items before proceeding')
+        @lang('Welcome to the installation wizard').
+        <br>
+        @lang('Before getting started, we need some information on the database').
+        @lang('You will need to know the following items before proceeding').
     </p>
     <ol>
         <li>@lang('Database host')</li>

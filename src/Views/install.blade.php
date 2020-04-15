@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@lang('Installation') - {{ config('app.name', 'Laravel') }}</title>
-    <link rel="shortcut icon" href="{{ Custom::getIcon() }}">
+    <link rel="shortcut icon" href="{{ asset('img/app/icon.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
     <style>
@@ -64,7 +64,7 @@
                     <div class="card-body">
                         <div class="p-15">
                             <div class="m-b-30 text-center">
-                                <img alt="App logo" class="img-fluid inline-block" src="{{ Custom::getIcon() }}" style="max-height: 45px;">
+                                <img alt="App logo" class="img-fluid inline-block" src="{{ asset('img/app/icon.png') }}" style="max-height: 45px;">
                                 <h2 class="inline-block m-0 align-middle pl-3 text-uppercase">{{ config('app.name', 'Laravel') }} @lang('Installation')</h2>
                                 <hr>
                             </div>
