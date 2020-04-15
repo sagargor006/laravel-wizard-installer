@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 
-class InstallIndexController extends Controller
+class InstallFolderController extends Controller
 {
     /**
      * Welcome step
@@ -16,6 +16,6 @@ class InstallIndexController extends Controller
      */
     public function index()
     {
-        return view('installer::steps.welcome');
+        return view('installer::steps.folders');
     }
 }

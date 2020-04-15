@@ -17,7 +17,9 @@ class LaravelVueDashboardInstallerProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->publishFiles();
+        // Merge config
+        $this->mergeConfigFrom(__DIR__.'/../Config/installer.php', 'installer');
+        // Merge routes
         $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
     }
 
@@ -34,15 +36,7 @@ class LaravelVueDashboardInstallerProvider extends ServiceProvider
         $router->middlewareGroup('api', [ToInstallMiddleware::class]);
         // Register middleware to prevent installer if is already installed
         $router->middlewareGroup('installer', [InstallerMiddleware::class]);
-    }
-
-    /**
-     * Publish config file for the installer.
-     *
-     * @return void
-     */
-    protected function publishFiles()
-    {
-        //
+        // Load views
+        $this->loadViewsFrom(__DIR__.'/../Views', 'installer');
     }
 }
