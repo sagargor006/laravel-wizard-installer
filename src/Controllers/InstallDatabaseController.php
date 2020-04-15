@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
@@ -31,7 +32,7 @@ class InstallDatabaseController extends Controller
     }
 
     /**
-     * Test database and
+     * Test database and set keys in .env
      *
      * @param  Request  $request
      * @return Application|Factory|RedirectResponse|View
@@ -50,6 +51,7 @@ class InstallDatabaseController extends Controller
                         'database' => $request->input('database_name'),
                         'username' => $request->input('database_username'),
                         'password' => $request->input('database_password'),
+                        'prefix' => $request->input('database_prefix'),
                     ]),
                 ],
             ],
@@ -77,11 +79,47 @@ class InstallDatabaseController extends Controller
                     'key' => 'DB_PASSWORD',
                     'value' => $request->input('database_password'),
                 ],
+                [
+                    'key' => 'DB_PREFIX',
+                    'value' => $request->input('database_prefix'),
+                ],
             ]);
             DotenvEditor::save();
             return redirect()->route('install.migrations');
         } catch (Exception $e) {
             return view('installer::steps.database', ['values' => $request->all(), 'error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * Success database connection
+     *
+     * @return Application|Factory|RedirectResponse|View
+     */
+    public function migrations()
+    {
+        if (
+            in_array(false, (new InstallServerController())->check()) ||
+            in_array(false, (new InstallFolderController())->check()) ||
+            !DB::connection()->getPdo()
+        ) {
+            return redirect()->route('install.database');
+        }
+        return view('installer::steps.migrations');
+    }
+
+    /**
+     * Run laravel migrations & seeders
+     *
+     * @return Application|Factory|RedirectResponse|View
+     */
+    public function makeMigrations()
+    {
+        try {
+            Artisan::call('migrate', ['--seed' => true]);
+            return redirect()->route('install.keys');
+        } catch (Exception $e) {
+            return view('installer::steps.migrations', ['error' => $e->getMessage() ? $e->getMessage() : __('An error occurred while executing migrations')]);
         }
     }
 }

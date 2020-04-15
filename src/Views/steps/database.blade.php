@@ -29,6 +29,10 @@
             <label for="password">@lang('Database password')</label>
             <input id="password" type="password" name="database_password" class="form-control" value="{{ isset($values['database_password']) ? $values['database_password'] : '' }}">
         </div>
+        <div class="form-group">
+            <label for="prefix">@lang('Database prefix')</label>
+            <input id="prefix" type="text" name="database_prefix" class="form-control" placeholder="@lang('Optional')" value="{{ isset($values['database_prefix']) ? $values['database_prefix'] : '' }}" required>
+        </div>
         <div class="actions">
             <button type="submit" class="btn btn-success float-right">
                 @lang('Next step')
