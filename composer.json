@@ -1,0 +1,24 @@
+{
+    "name": "dacoto/laravel-vue-dashboard-installer",
+    "description": "Laravel vue dashboard auto-installer package",
+    "type": "library",
+    "require": {
+        "php": "^7.2.5",
+        "laravel/framework": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "dacoto\\LaravelInstaller\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Cortés",
+            "email": "dacoto97@hotmail.com"
+        }
+    ]
+}
