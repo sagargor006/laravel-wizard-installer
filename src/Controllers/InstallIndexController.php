@@ -40,11 +40,12 @@ class InstallIndexController extends Controller
             return redirect()->route('install.database');
         }
         $path = (string) url('/');
-        DotenvEditor::setKey('INSTALLED', true);
-        DotenvEditor::save();
+        file_put_contents(storage_path('framework/cache/installed'), date('Y/m/d h:i:s').PHP_EOL, FILE_APPEND | LOCK_EX);
         Artisan::call('route:clear');
         Artisan::call('cache:clear');
         Artisan::call('config:clear');
+        Artisan::call('view:clear');
+        Artisan::call('optimize:clear');
         return view('installer::steps.finish', ['path' => $path]);
     }
 }

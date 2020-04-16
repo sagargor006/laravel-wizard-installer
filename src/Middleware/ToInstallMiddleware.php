@@ -17,9 +17,19 @@ class ToInstallMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!env('INSTALLED', false) && explode('/', $request->route()->uri())[0] !== 'install') {
+        if (!$this->alreadyInstalled() && explode('/', $request->route()->uri())[0] !== 'install') {
             return redirect()->route('install.index');
         }
         return $next($request);
+    }
+
+    /**
+     * If application is already installed.
+     *
+     * @return bool
+     */
+    public function alreadyInstalled()
+    {
+        return file_exists(storage_path('framework/cache/installed'));
     }
 }
