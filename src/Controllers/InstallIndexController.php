@@ -4,7 +4,10 @@ namespace dacoto\LaravelInstaller\Controllers;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 
@@ -23,12 +26,25 @@ class InstallIndexController extends Controller
     /**
      * Success installed
      *
-     * @return Application|Factory|View
+     * @return Application|Factory|RedirectResponse|View
      */
     public function finish()
     {
+        if (
+            in_array(false, (new InstallServerController())->check()) ||
+            in_array(false, (new InstallFolderController())->check()) ||
+            !DB::connection()->getPdo() ||
+            empty(DotenvEditor::getValue('APP_KEY')) ||
+            empty(DotenvEditor::getValue('JWT_SECRET'))
+        ) {
+            return redirect()->route('install.database');
+        }
+        $path = (string) url('/');
         DotenvEditor::setKey('INSTALLED', true);
         DotenvEditor::save();
-        return view('installer::steps.finish');
+        Artisan::call('route:cache');
+        Artisan::call('cache:clear');
+        Artisan::call('config:cache');
+        return view('installer::steps.finish', ['path' => $path]);
     }
 }

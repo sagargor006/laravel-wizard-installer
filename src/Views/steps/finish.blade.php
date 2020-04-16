@@ -13,7 +13,7 @@
                 @lang('Your website is located at this URL')
             </p>
             <p>
-                <a href="{{ url('/') }}">{{ url('/') }}</a>
+                <a href="{{ $path }}">{{ $path }}</a>
             </p>
 
         </div>
@@ -24,7 +24,7 @@
                 @lang('Use the following link to log into the administration area'):
             </p>
             <p>
-                <a href="{{ route('auth', 'login') }}">{{ route('auth', 'login') }}</a>
+                <a href="{{ $path }}/auth/login">{{ $path }}/auth/login</a>
             </p>
             <p>
                 @lang('Email'): <b>admin@admin.com</b>

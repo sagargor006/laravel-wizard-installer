@@ -38,6 +38,13 @@ class InstallKeysController extends Controller
      */
     public function setKeys()
     {
+        if (
+            in_array(false, (new InstallServerController())->check()) ||
+            in_array(false, (new InstallFolderController())->check()) ||
+            !DB::connection()->getPdo()
+        ) {
+            return redirect()->route('install.database');
+        }
         try {
             Artisan::call('key:generate', ['--force' => true, '--show' => true]);
             if (empty(DotenvEditor::getValue('APP_KEY'))) {
