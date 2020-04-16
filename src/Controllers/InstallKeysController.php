@@ -26,7 +26,7 @@ class InstallKeysController extends Controller
             in_array(false, (new InstallFolderController())->check()) ||
             !DB::connection()->getPdo()
         ) {
-            return redirect()->route('install.database');
+            return redirect()->route('LaravelInstaller::install.database');
         }
         return view('installer::steps.keys');
     }
@@ -43,7 +43,7 @@ class InstallKeysController extends Controller
             in_array(false, (new InstallFolderController())->check()) ||
             !DB::connection()->getPdo()
         ) {
-            return redirect()->route('install.database');
+            return redirect()->route('LaravelInstaller::install.database');
         }
         try {
             Artisan::call('key:generate', ['--force' => true, '--show' => true]);
@@ -56,7 +56,7 @@ class InstallKeysController extends Controller
             if (empty(DotenvEditor::getValue('APP_KEY')) || empty(DotenvEditor::getValue('JWT_SECRET'))) {
                 return view('installer::steps.keys', ['error' => __('The application keys could not be generated.')]);
             }
-            return redirect()->route('install.finish');
+            return redirect()->route('LaravelInstaller::install.finish');
         } catch (Exception $e) {
             return view('installer::steps.keys', ['error' => $e->getMessage()]);
         }

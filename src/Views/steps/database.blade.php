@@ -8,7 +8,7 @@
     @if(isset($error))
         <div class="alert alert-danger" role="alert">{!! $error !!}</div>
     @endif
-    <form method="post" action="{{ route('install.database') }}">
+    <form method="post" action="{{ route('LaravelInstaller::install.setDatabase') }}">
         <div class="form-group">
             <label for="host">@lang('Database host') <span class="text-danger">*</span></label>
             <input id="host" type="text" name="database_hostname" class="form-control" value="{{ isset($values['database_hostname']) ? $values['database_hostname'] : '127.0.0.1' }}" required>

@@ -21,7 +21,7 @@
     <p>@lang('Installer will insert this information inside a configuration file so your site can communicate with your database').</p>
     <p>@lang('Need more help?') <a href="https://docs.dacoto.com/laravel-dashboard/installation/installation-wizard" target="_blank">@lang('See installation guide').</a></p>
     <div class="actions">
-        <a href="{{ route('install.server') }}" class="btn btn-success float-right">
+        <a href="{{ route('LaravelInstaller::install.server') }}" class="btn btn-success float-right">
             @lang('Next step')
             <i class="fas fa-angle-right ml-2"></i>
         </a>

@@ -18,7 +18,7 @@ class ToInstallMiddleware
     public function handle($request, Closure $next)
     {
         if (!$this->alreadyInstalled() && explode('/', $request->route()->uri())[0] !== 'install') {
-            return redirect()->route('install.index');
+            return redirect()->route('LaravelInstaller::install.index');
         }
         return $next($request);
     }

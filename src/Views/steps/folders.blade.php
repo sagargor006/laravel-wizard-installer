@@ -36,12 +36,12 @@
     </ul>
     <div class="actions">
         @if(!in_array(false, $checks))
-            <a href="{{ route('install.database') }}" class="btn btn-success float-right">
+            <a href="{{ route('LaravelInstaller::install.database') }}" class="btn btn-success float-right">
                 @lang('Next step')
                 <i class="fas fa-angle-right ml-2"></i>
             </a>
         @else
-            <a href="{{ route('install.folders') }}" class="btn btn-danger float-right">
+            <a href="{{ route('LaravelInstaller::install.folders') }}" class="btn btn-danger float-right">
                 @lang('Reload')
                 <i class="fas fa-redo ml-2"></i>
             </a>

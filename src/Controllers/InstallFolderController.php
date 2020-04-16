@@ -19,7 +19,7 @@ class InstallFolderController extends Controller
     public function index()
     {
         if (in_array(false, (new InstallServerController())->check())) {
-            return redirect()->route('install.server');
+            return redirect()->route('LaravelInstaller::install.server');
         }
         return view('installer::steps.folders', ['checks' => $this->check()]);
     }
