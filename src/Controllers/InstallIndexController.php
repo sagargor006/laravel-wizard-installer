@@ -42,9 +42,9 @@ class InstallIndexController extends Controller
         $path = (string) url('/');
         DotenvEditor::setKey('INSTALLED', true);
         DotenvEditor::save();
-        Artisan::call('route:cache');
+        Artisan::call('route:clear');
         Artisan::call('cache:clear');
-        Artisan::call('config:cache');
+        Artisan::call('config:clear');
         return view('installer::steps.finish', ['path' => $path]);
     }
 }
