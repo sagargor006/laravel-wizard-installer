@@ -115,6 +115,13 @@ class InstallDatabaseController extends Controller
      */
     public function makeMigrations()
     {
+        if (
+            in_array(false, (new InstallServerController())->check()) ||
+            in_array(false, (new InstallFolderController())->check()) ||
+            !DB::connection()->getPdo()
+        ) {
+            return redirect()->route('install.database');
+        }
         try {
             Artisan::call('migrate', ['--seed' => true]);
             return redirect()->route('install.keys');
