@@ -8,7 +8,7 @@
     @endif
     <p>@lang('The encryption keys of the application and the api connection must be generated').</p>
     <p>@lang('The storage link will also be generated').</p>
-    <form method="post" action="{{ route('install.keys') }}">
+    <form method="post" action="{{ route('LaravelInstaller::install.setKeys') }}">
         <div class="actions">
             <button type="submit" class="btn btn-success float-right">
                 @lang('Next step')

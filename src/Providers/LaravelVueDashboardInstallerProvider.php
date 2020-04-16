@@ -33,7 +33,6 @@ class LaravelVueDashboardInstallerProvider extends ServiceProvider
     {
         // Register middleware to redirect to installer if not installed
         $router->middlewareGroup('web', [ToInstallMiddleware::class]);
-        $router->middlewareGroup('api', [ToInstallMiddleware::class]);
         // Register middleware to prevent installer if is already installed
         $router->middlewareGroup('installer', [InstallerMiddleware::class]);
         // Load views
