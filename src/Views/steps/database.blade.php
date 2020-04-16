@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="prefix">@lang('Database prefix')</label>
-            <input id="prefix" type="text" name="database_prefix" class="form-control" placeholder="@lang('Optional')" value="{{ isset($values['database_prefix']) ? $values['database_prefix'] : '' }}" required>
+            <input id="prefix" type="text" name="database_prefix" class="form-control" placeholder="@lang('Optional')" value="{{ isset($values['database_prefix']) ? $values['database_prefix'] : '' }}">
         </div>
         <div class="actions">
             <button type="submit" class="btn btn-success float-right">
