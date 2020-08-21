@@ -17,7 +17,7 @@ class ToInstallMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!$this->alreadyInstalled() && explode('/', $request->route()->uri())[0] !== 'install') {
+        if (!$this->alreadyInstalled() && explode('/', $request->route() ? $request->route()->uri() : '')[0] !== 'install') {
             return redirect()->route('LaravelInstaller::install.index');
         }
         return $next($request);
@@ -28,7 +28,7 @@ class ToInstallMiddleware
      *
      * @return bool
      */
-    public function alreadyInstalled()
+    public function alreadyInstalled(): bool
     {
         return file_exists(storage_path('framework/cache/installed'));
     }

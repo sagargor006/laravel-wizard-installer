@@ -8,7 +8,7 @@ use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
-class LaravelVueDashboardInstallerProvider extends ServiceProvider
+class LaravelDashboardInstallerProvider extends ServiceProvider
 {
     /**
      * Register the service provider.

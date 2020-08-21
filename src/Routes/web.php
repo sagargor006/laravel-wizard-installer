@@ -7,7 +7,7 @@ Route::group([
     'as' => 'LaravelInstaller::',
     'namespace' => 'dacoto\LaravelInstaller\Controllers',
     'middleware' => ['web', 'installer']
-], function () {
+], static function () {
     Route::get('/', ['as' => 'install.index', 'uses' => 'InstallIndexController@index']);
     Route::get('/server', ['as' => 'install.server', 'uses' => 'InstallServerController@index']);
     Route::get('/folders', ['as' => 'install.folders', 'uses' => 'InstallFolderController@index']);
