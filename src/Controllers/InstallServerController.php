@@ -24,7 +24,7 @@ class InstallServerController extends Controller
      *
      * @return array
      */
-    public function check()
+    public function check(): array
     {
         return [
             'php' => version_compare(PHP_VERSION, config('installer.php'), '>'),

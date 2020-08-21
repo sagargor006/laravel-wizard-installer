@@ -22,9 +22,9 @@ class InstallKeysController extends Controller
     public function index()
     {
         if (
-            in_array(false, (new InstallServerController())->check()) ||
-            in_array(false, (new InstallFolderController())->check()) ||
-            !DB::connection()->getPdo()
+            !DB::connection()->getPdo() ||
+            in_array(false, (new InstallServerController())->check(), true) ||
+            in_array(false, (new InstallFolderController())->check(), true)
         ) {
             return redirect()->route('LaravelInstaller::install.database');
         }
@@ -39,9 +39,9 @@ class InstallKeysController extends Controller
     public function setKeys()
     {
         if (
-            in_array(false, (new InstallServerController())->check()) ||
-            in_array(false, (new InstallFolderController())->check()) ||
-            !DB::connection()->getPdo()
+            !DB::connection()->getPdo() ||
+            in_array(false, (new InstallServerController())->check(), true) ||
+            in_array(false, (new InstallFolderController())->check(), true)
         ) {
             return redirect()->route('LaravelInstaller::install.database');
         }

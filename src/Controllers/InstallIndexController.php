@@ -31,11 +31,11 @@ class InstallIndexController extends Controller
     public function finish()
     {
         if (
-            in_array(false, (new InstallServerController())->check()) ||
-            in_array(false, (new InstallFolderController())->check()) ||
-            !DB::connection()->getPdo() ||
             empty(DotenvEditor::getValue('APP_KEY')) ||
-            empty(DotenvEditor::getValue('JWT_SECRET'))
+            empty(DotenvEditor::getValue('JWT_SECRET')) ||
+            !DB::connection()->getPdo() ||
+            in_array(false, (new InstallServerController())->check(), true) ||
+            in_array(false, (new InstallFolderController())->check(), true)
         ) {
             return redirect()->route('LaravelInstaller::install.database');
         }

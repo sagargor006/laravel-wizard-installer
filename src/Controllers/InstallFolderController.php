@@ -18,7 +18,7 @@ class InstallFolderController extends Controller
      */
     public function index()
     {
-        if (in_array(false, (new InstallServerController())->check())) {
+        if (in_array(false, (new InstallServerController())->check(), true)) {
             return redirect()->route('LaravelInstaller::install.server');
         }
         return view('installer::steps.folders', ['checks' => $this->check()]);
@@ -29,7 +29,7 @@ class InstallFolderController extends Controller
      *
      * @return array
      */
-    public function check()
+    public function check(): array
     {
         return [
             'storage.framework' => (int) File::chmod('../storage/framework') > 775,

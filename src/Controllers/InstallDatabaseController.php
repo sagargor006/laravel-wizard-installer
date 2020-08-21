@@ -23,8 +23,8 @@ class InstallDatabaseController extends Controller
     public function database()
     {
         if (
-            in_array(false, (new InstallServerController())->check()) ||
-            in_array(false, (new InstallFolderController())->check())
+            in_array(false, (new InstallServerController())->check(), true) ||
+            in_array(false, (new InstallFolderController())->check(), true)
         ) {
             return redirect()->route('LaravelInstaller::install.folders');
         }
@@ -99,9 +99,9 @@ class InstallDatabaseController extends Controller
     public function migrations()
     {
         if (
-            in_array(false, (new InstallServerController())->check()) ||
-            in_array(false, (new InstallFolderController())->check()) ||
-            !DB::connection()->getPdo()
+            !DB::connection()->getPdo() ||
+            in_array(false, (new InstallServerController())->check(), true) ||
+            in_array(false, (new InstallFolderController())->check(), true)
         ) {
             return redirect()->route('LaravelInstaller::install.database');
         }
@@ -116,9 +116,9 @@ class InstallDatabaseController extends Controller
     public function runMigrations()
     {
         if (
-            in_array(false, (new InstallServerController())->check()) ||
-            in_array(false, (new InstallFolderController())->check()) ||
-            !DB::connection()->getPdo()
+            !DB::connection()->getPdo() ||
+            in_array(false, (new InstallServerController())->check(), true) ||
+            in_array(false, (new InstallFolderController())->check(), true)
         ) {
             return redirect()->route('LaravelInstaller::install.database');
         }
@@ -126,7 +126,7 @@ class InstallDatabaseController extends Controller
             Artisan::call('migrate', ['--seed' => true]);
             return redirect()->route('LaravelInstaller::install.keys');
         } catch (Exception $e) {
-            return view('installer::steps.migrations', ['error' => $e->getMessage() ? $e->getMessage() : __('An error occurred while executing migrations')]);
+            return view('installer::steps.migrations', ['error' => $e->getMessage() ?: __('An error occurred while executing migrations')]);
         }
     }
 }
