@@ -1,6 +1,6 @@
 {
-    "name": "dacoto/laravel-vue-dashboard-installer",
-    "description": "Laravel vue dashboard auto-installer package",
+    "name": "dacoto/laravel-dashboard-installer",
+    "description": "Laravel dashboard auto-installer package",
     "type": "library",
     "require": {
         "php": "^7.2.5",
@@ -15,7 +15,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "dacoto\\LaravelInstaller\\Providers\\LaravelVueDashboardInstallerProvider"
+                "dacoto\\LaravelInstaller\\Providers\\LaravelDashboardInstallerProvider"
             ]
         }
     },
@@ -23,7 +23,7 @@
     "authors": [
         {
             "name": "David Cortés",
-            "email": "dacoto97@hotmail.com"
+            "email": "cortestoledanodavid@gmail.com"
         }
     ]
 }
