@@ -35,7 +35,7 @@
         </li>
     </ul>
     <div class="actions">
-        @if(!in_array(false, $checks))
+        @if(!in_array(false, $checks, true))
             <a href="{{ route('LaravelInstaller::install.database') }}" class="btn btn-success float-right">
                 @lang('Next step')
                 <i class="fas fa-angle-right ml-2"></i>
