@@ -8,9 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: PHP Syntax Checker
-      uses: StephaneBour/actions-php-lint@7.3
+      - uses: actions/checkout@v2
+
+      - name: PHP Syntax Checker
+        uses: StephaneBour/actions-php-lint@7.3
