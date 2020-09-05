@@ -51,9 +51,8 @@ class InstallKeysController extends Controller
                 DotenvEditor::setKey('APP_KEY', trim(str_replace('"', '', Artisan::output())));
                 DotenvEditor::save();
             }
-            Artisan::call('jwt:secret', ['--always-no' => true]);
             Artisan::call('storage:link');
-            if (empty(DotenvEditor::getValue('APP_KEY')) || empty(DotenvEditor::getValue('JWT_SECRET'))) {
+            if (empty(DotenvEditor::getValue('APP_KEY'))) {
                 return view('installer::steps.keys', ['error' => 'The application keys could not be generated.']);
             }
             return redirect()->route('LaravelInstaller::install.finish');

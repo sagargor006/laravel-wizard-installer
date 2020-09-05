@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
+use JsonException;
 
 class InstallIndexController extends Controller
 {
@@ -27,12 +28,12 @@ class InstallIndexController extends Controller
      * Success installed
      *
      * @return Application|Factory|RedirectResponse|View
+     * @throws JsonException
      */
     public function finish()
     {
         if (
             empty(DotenvEditor::getValue('APP_KEY')) ||
-            empty(DotenvEditor::getValue('JWT_SECRET')) ||
             !DB::connection()->getPdo() ||
             in_array(false, (new InstallServerController())->check(), true) ||
             in_array(false, (new InstallFolderController())->check(), true)
@@ -40,7 +41,10 @@ class InstallIndexController extends Controller
             return redirect()->route('LaravelInstaller::install.database');
         }
         $path = (string) url('/');
-        file_put_contents(storage_path('framework/cache/installed'), date('Y/m/d h:i:s').PHP_EOL, FILE_APPEND | LOCK_EX);
+        $data = json_encode([
+            'date' => date('Y/m/d h:i:s')
+        ], JSON_THROW_ON_ERROR);
+        file_put_contents(storage_path('framework/cache/installed'), $data, FILE_APPEND | LOCK_EX);
         Artisan::call('route:clear');
         Artisan::call('cache:clear');
         Artisan::call('config:clear');
