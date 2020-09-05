@@ -54,7 +54,7 @@ class InstallKeysController extends Controller
             Artisan::call('jwt:secret', ['--always-no' => true]);
             Artisan::call('storage:link');
             if (empty(DotenvEditor::getValue('APP_KEY')) || empty(DotenvEditor::getValue('JWT_SECRET'))) {
-                return view('installer::steps.keys', ['error' => __('The application keys could not be generated.')]);
+                return view('installer::steps.keys', ['error' => 'The application keys could not be generated.']);
             }
             return redirect()->route('LaravelInstaller::install.finish');
         } catch (Exception $e) {

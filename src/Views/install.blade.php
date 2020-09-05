@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@lang('Installation') - {{ config('app.name', 'Laravel') }}</title>
-    <link rel="shortcut icon" href="/img/app/icon.png">
+    <title>Installation - {{ config('app.name', 'Laravel') }}</title>
+    <link rel="shortcut icon" href="/images/default/icon.png">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
@@ -12,7 +12,7 @@
         }
 
         .layout {
-            background-image: url("/img/app/background.jpg");
+            background-image: url("/images/default/background.jpg");
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -64,7 +64,7 @@
                         <div class="p-15">
                             <div class="m-b-30 text-center">
                                 <img alt="App logo" class="img-fluid inline-block" src="/img/app/icon.png" style="max-height: 45px;">
-                                <h2 class="inline-block m-0 align-middle pl-3 text-uppercase">{{ config('app.name', 'Laravel') }} @lang('Installation')</h2>
+                                <h2 class="inline-block m-0 align-middle pl-3 text-uppercase">{{ config('app.name', 'Laravel') }} Installation</h2>
                                 <hr>
                             </div>
                             @yield('step')

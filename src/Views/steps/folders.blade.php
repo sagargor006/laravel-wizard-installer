@@ -1,7 +1,7 @@
 @extends('installer::install')
 
 @section('step')
-    <p>@lang('Verifying write and read permissions on folders')</p>
+    <p>Verifying write and read permissions on folders</p>
     <ul class="list-group mb-3">
         <li class="list-group-item">
             {{ base_path().DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'framework' }}
@@ -37,12 +37,12 @@
     <div class="actions">
         @if(!in_array(false, $checks, true))
             <a href="{{ route('LaravelInstaller::install.database') }}" class="btn btn-success float-right">
-                @lang('Next step')
+                Next step
                 <i class="fas fa-angle-right ml-2"></i>
             </a>
         @else
             <a href="{{ route('LaravelInstaller::install.folders') }}" class="btn btn-danger float-right">
-                @lang('Reload')
+                Reload
                 <i class="fas fa-redo ml-2"></i>
             </a>
         @endif

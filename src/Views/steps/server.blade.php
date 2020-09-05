@@ -1,7 +1,7 @@
 @extends('installer::install')
 
 @section('step')
-    <p>@lang('Checking the server requirements')</p>
+    <p>Checking the server requirements</p>
     <ul class="list-group mb-3">
         <li class="list-group-item">
             PHP Version
@@ -86,14 +86,14 @@
         </li>
     </ul>
     <div class="actions">
-        @if(!in_array(false, $checks))
+        @if(!in_array(false, $checks, true))
             <a href="{{ route('LaravelInstaller::install.folders') }}" class="btn btn-success float-right">
-                @lang('Next step')
+                Next step
                 <i class="fas fa-angle-right ml-2"></i>
             </a>
         @else
             <a href="{{ route('LaravelInstaller::install.server') }}" class="btn btn-danger float-right">
-                @lang('Reload')
+                Reload
                 <i class="fas fa-redo ml-2"></i>
             </a>
         @endif
