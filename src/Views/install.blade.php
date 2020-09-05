@@ -3,73 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Installation - {{ config('app.name', 'Laravel') }}</title>
     <link rel="shortcut icon" href="/images/default/icon.png">
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-size: 90%;
-        }
-
-        .layout {
-            background-image: url("/images/default/background.jpg");
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: normal;
-            line-height: 1.5;
-        }
-
-        h2 {
-            font-size: 22px;
-        }
-
-        hr {
-            border-top: 1px solid #e9eaec;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .full-height {
-            min-height: 100vh;
-        }
-
-        .p-15 {
-            padding: 15px !important;
-        }
-
-        .fa-20 {
-            font-size: 20px;
-        }
-
-        .m-b-30 {
-            margin-bottom: 30px !important;
-        }
-
-        .inline-block {
-            display: inline-block !important;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@1/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="layout">
-    <div class="container">
-        <div class="row full-height align-items-center">
-            <div class="col-10 mx-auto">
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <div class="p-15">
-                            <div class="m-b-30 text-center">
-                                <img alt="App logo" class="img-fluid inline-block" src="/img/app/icon.png" style="max-height: 45px;">
-                                <h2 class="inline-block m-0 align-middle pl-3 text-uppercase">{{ config('app.name', 'Laravel') }} Installation</h2>
-                                <hr>
-                            </div>
-                            @yield('step')
-                        </div>
+<div class="h-screen w-screen bg-cover bg-no-repeat bg-center" style="background-image: url('/images/default/background.jpg');">
+    <div class="flex h-screen py-6">
+        <div class="container m-auto">
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div class="px-4 py-8 border-b border-gray-200 sm:px-6">
+                    <div class="flex justify-center items-center">
+                        <img alt="App logo" class="h-12" src="/images/default/icon.png">
+                        <h2 class="pl-6 uppercase font-medium text-2xl text-gray-800">{{ config('app.name', 'Laravel') }} Installation</h2>
                     </div>
+                </div>
+                <div class="px-4 py-5 sm:px-6">
+                    @yield('step')
                 </div>
             </div>
         </div>
