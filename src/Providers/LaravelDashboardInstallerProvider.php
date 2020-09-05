@@ -15,7 +15,7 @@ class LaravelDashboardInstallerProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         // Merge config
         $this->mergeConfigFrom(__DIR__.'/../Config/installer.php', 'installer');
@@ -29,7 +29,7 @@ class LaravelDashboardInstallerProvider extends ServiceProvider
      * @param  Router  $router
      * @param  Kernel  $kernel
      */
-    public function boot(Router $router, Kernel $kernel)
+    public function boot(Router $router, Kernel $kernel): void
     {
         // Register middleware to redirect to installer if not installed
         $router->middlewareGroup('web', [ToInstallMiddleware::class]);

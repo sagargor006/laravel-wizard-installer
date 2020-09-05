@@ -15,9 +15,9 @@ class InstallerMiddleware
      * @param  Closure  $next
      * @return RedirectResponse|mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        if ($this->alreadyInstalled() || explode('/', $request->route()->uri())[0] !== 'install') {
+        if ($this->alreadyInstalled() || explode('/', $request->route() ? $request->route()->uri() : '')[0] !== 'install') {
             abort(404);
         }
         return $next($request);
