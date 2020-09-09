@@ -5,8 +5,8 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
-        "laravel/framework": "^8.0",
-        "sixlive/dotenv-editor": "^1.2"
+        "dacoto/laravel-setenv": "^1.0",
+        "laravel/framework": "^7.0|^8.0"
     },
     "autoload": {
         "psr-4": {
