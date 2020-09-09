@@ -2,6 +2,7 @@
 
 namespace dacoto\LaravelInstaller\Controllers;
 
+use dacoto\LaravelInstaller\Support\EnvEditor;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -11,7 +12,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 
 class InstallDatabaseController extends Controller
 {
@@ -58,33 +58,12 @@ class InstallDatabaseController extends Controller
         ]);
         try {
             DB::connection()->getPdo();
-            DotenvEditor::setKeys([
-                [
-                    'key' => 'DB_HOST',
-                    'value' => $request->input('database_hostname'),
-                ],
-                [
-                    'key' => 'DB_PORT',
-                    'value' => $request->input('database_port'),
-                ],
-                [
-                    'key' => 'DB_DATABASE',
-                    'value' => $request->input('database_name'),
-                ],
-                [
-                    'key' => 'DB_USERNAME',
-                    'value' => $request->input('database_username'),
-                ],
-                [
-                    'key' => 'DB_PASSWORD',
-                    'value' => $request->input('database_password'),
-                ],
-                [
-                    'key' => 'DB_PREFIX',
-                    'value' => $request->input('database_prefix'),
-                ],
-            ]);
-            DotenvEditor::save();
+            EnvEditor::setEnv('DB_HOST', $request->input('database_hostname'));
+            EnvEditor::setEnv('DB_PORT', $request->input('database_port'));
+            EnvEditor::setEnv('DB_DATABASE', $request->input('database_name'));
+            EnvEditor::setEnv('DB_USERNAME', $request->input('database_username'));
+            EnvEditor::setEnv('DB_PASSWORD', $request->input('database_password'));
+            EnvEditor::setEnv('DB_PREFIX', $request->input('database_prefix'));
             return redirect()->route('LaravelInstaller::install.migrations');
         } catch (Exception $e) {
             return view('installer::steps.database', ['values' => $request->all(), 'error' => $e->getMessage()]);
