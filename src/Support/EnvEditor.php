@@ -2,22 +2,22 @@
 
 namespace dacoto\LaravelInstaller\Support;
 
-use sixlive\DotenvEditor\DotenvEditor;
-
 class EnvEditor
 {
     public static function setEnv($key, $value = null): void
     {
-        $editor = new DotenvEditor();
-        $editor->load(base_path('.env'));
-        if (empty($value)) {
-            $editor->unset($key);
+        $path = base_path('.env');
+        if (is_bool(env($key))) {
+            $old = env($key) ? 'true' : 'false';
+        } elseif (env($key) === null) {
+            $old = 'null';
         } else {
-            if ($value === trim($value) && strpos($value, ' ') !== false) {
-                $value = '"'.$value.'"';
-            }
-            $editor->set($key, $value);
+            $old = env($key);
         }
-        $editor->save();
+        if (file_exists($path)) {
+            file_put_contents($path, str_replace(
+                "$key=".$old, "$key=".$value, file_get_contents($path)
+            ));
+        }
     }
 }
