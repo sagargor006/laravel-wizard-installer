@@ -30,6 +30,6 @@ class InstallerMiddleware
      */
     public function alreadyInstalled(): bool
     {
-        return file_exists(storage_path('framework/cache/installed'));
+        return file_exists(storage_path('installed'));
     }
 }

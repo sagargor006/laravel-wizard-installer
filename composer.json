@@ -4,9 +4,9 @@
     "type": "library",
     "require": {
         "php": "^7.3",
-        "laravel/framework": "^7.0",
-        "jackiedo/dotenv-editor": "^1.1",
-        "ext-json": "*"
+        "ext-json": "*",
+        "laravel/framework": "^8.0",
+        "sixlive/dotenv-editor": "^1.2"
     },
     "autoload": {
         "psr-4": {

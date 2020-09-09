@@ -2,6 +2,7 @@
 
 namespace dacoto\LaravelInstaller\Controllers;
 
+use dacoto\LaravelInstaller\Support\EnvEditor;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -10,7 +11,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 
 class InstallKeysController extends Controller
 {
@@ -47,12 +47,11 @@ class InstallKeysController extends Controller
         }
         try {
             Artisan::call('key:generate', ['--force' => true, '--show' => true]);
-            if (empty(DotenvEditor::getValue('APP_KEY'))) {
-                DotenvEditor::setKey('APP_KEY', trim(str_replace('"', '', Artisan::output())));
-                DotenvEditor::save();
+            if (empty(env('APP_KEY'))) {
+                EnvEditor::setEnv('DB_HOST', trim(str_replace('"', '', Artisan::output())));
             }
             Artisan::call('storage:link');
-            if (empty(DotenvEditor::getValue('APP_KEY'))) {
+            if (empty(env('APP_KEY'))) {
                 return view('installer::steps.keys', ['error' => 'The application keys could not be generated.']);
             }
             return redirect()->route('LaravelInstaller::install.finish');
