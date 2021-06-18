@@ -2,6 +2,7 @@
 
 namespace dacoto\LaravelWizardInstaller\Controllers;
 
+use dacoto\LaravelWizardInstaller\Support\EnvEditor;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -32,7 +33,7 @@ class InstallIndexController extends Controller
     public function finish()
     {
         if (
-            empty(env('APP_KEY')) ||
+            empty(EnvEditor::getEnv('APP_KEY')) ||
             !DB::connection()->getPdo() ||
             in_array(false, (new InstallServerController())->check(), true) ||
             in_array(false, (new InstallFolderController())->check(), true)

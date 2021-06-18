@@ -47,11 +47,11 @@ class InstallKeysController extends Controller
         }
         try {
             Artisan::call('key:generate', ['--force' => true, '--show' => true]);
-            if (empty(env('APP_KEY'))) {
+            if (empty(EnvEditor::getEnv('APP_KEY'))) {
                 EnvEditor::setEnv('APP_KEY', trim(str_replace('"', '', Artisan::output())));
             }
             Artisan::call('storage:link');
-            if (empty(env('APP_KEY'))) {
+            if (empty(EnvEditor::getEnv('APP_KEY'))) {
                 return view('installer::steps.keys', ['error' => 'The application keys could not be generated.']);
             }
             return redirect()->route('LaravelWizardInstaller::install.finish');

@@ -1,6 +1,6 @@
 <?php
 
-namespace dacoto\LaravelInstaller\Support;
+namespace dacoto\LaravelWizardInstaller\Support;
 
 use dacoto\SetEnv\Facades\SetEnv;
 
@@ -10,5 +10,10 @@ class EnvEditor
     {
         SetEnv::setKey($key, $value);
         SetEnv::save();
+    }
+
+    public static function getEnv($key, $default = null)
+    {
+        return env($key, $default);
     }
 }
