@@ -2,7 +2,7 @@
 
 namespace dacoto\LaravelInstaller\Support;
 
-use SetEnv;
+use dacoto\SetEnv\Facades\SetEnv;
 
 class EnvEditor
 {

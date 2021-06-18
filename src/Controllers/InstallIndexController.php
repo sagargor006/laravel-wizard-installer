@@ -1,6 +1,6 @@
 <?php
 
-namespace dacoto\LaravelInstaller\Controllers;
+namespace dacoto\LaravelWizardInstaller\Controllers;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -37,7 +37,7 @@ class InstallIndexController extends Controller
             in_array(false, (new InstallServerController())->check(), true) ||
             in_array(false, (new InstallFolderController())->check(), true)
         ) {
-            return redirect()->route('LaravelInstaller::install.database');
+            return redirect()->route('LaravelWizardInstaller::install.database');
         }
         $path = (string) url('/');
         $data = json_encode([

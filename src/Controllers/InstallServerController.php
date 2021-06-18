@@ -1,6 +1,6 @@
 <?php
 
-namespace dacoto\LaravelInstaller\Controllers;
+namespace dacoto\LaravelWizardInstaller\Controllers;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

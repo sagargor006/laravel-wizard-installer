@@ -1,8 +1,8 @@
 <?php
 
-namespace dacoto\LaravelInstaller\Controllers;
+namespace dacoto\LaravelWizardInstaller\Controllers;
 
-use dacoto\LaravelInstaller\Support\EnvEditor;
+use dacoto\LaravelWizardInstaller\Support\EnvEditor;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -26,7 +26,7 @@ class InstallKeysController extends Controller
             in_array(false, (new InstallServerController())->check(), true) ||
             in_array(false, (new InstallFolderController())->check(), true)
         ) {
-            return redirect()->route('LaravelInstaller::install.database');
+            return redirect()->route('LaravelWizardInstaller::install.database');
         }
         return view('installer::steps.keys');
     }
@@ -43,18 +43,18 @@ class InstallKeysController extends Controller
             in_array(false, (new InstallServerController())->check(), true) ||
             in_array(false, (new InstallFolderController())->check(), true)
         ) {
-            return redirect()->route('LaravelInstaller::install.database');
+            return redirect()->route('LaravelWizardInstaller::install.database');
         }
         try {
             Artisan::call('key:generate', ['--force' => true, '--show' => true]);
             if (empty(env('APP_KEY'))) {
-                EnvEditor::setEnv('DB_HOST', trim(str_replace('"', '', Artisan::output())));
+                EnvEditor::setEnv('APP_KEY', trim(str_replace('"', '', Artisan::output())));
             }
             Artisan::call('storage:link');
             if (empty(env('APP_KEY'))) {
                 return view('installer::steps.keys', ['error' => 'The application keys could not be generated.']);
             }
-            return redirect()->route('LaravelInstaller::install.finish');
+            return redirect()->route('LaravelWizardInstaller::install.finish');
         } catch (Exception $e) {
             return view('installer::steps.keys', ['error' => $e->getMessage()]);
         }

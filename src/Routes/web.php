@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => 'install',
-    'as' => 'LaravelInstaller::',
-    'namespace' => 'dacoto\LaravelInstaller\Controllers',
+    'as' => 'LaravelWizardInstaller::',
+    'namespace' => 'dacoto\LaravelWizardInstaller\Controllers',
     'middleware' => ['web', 'installer']
 ], static function () {
     Route::get('/', ['as' => 'install.index', 'uses' => 'InstallIndexController@index']);

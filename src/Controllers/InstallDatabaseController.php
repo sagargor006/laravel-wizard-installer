@@ -1,8 +1,8 @@
 <?php
 
-namespace dacoto\LaravelInstaller\Controllers;
+namespace dacoto\LaravelWizardInstaller\Controllers;
 
-use dacoto\LaravelInstaller\Support\EnvEditor;
+use dacoto\LaravelWizardInstaller\Support\EnvEditor;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -26,7 +26,7 @@ class InstallDatabaseController extends Controller
             in_array(false, (new InstallServerController())->check(), true) ||
             in_array(false, (new InstallFolderController())->check(), true)
         ) {
-            return redirect()->route('LaravelInstaller::install.folders');
+            return redirect()->route('LaravelWizardInstaller::install.folders');
         }
         return view('installer::steps.database');
     }
@@ -64,9 +64,17 @@ class InstallDatabaseController extends Controller
             EnvEditor::setEnv('DB_USERNAME', $request->input('database_username'));
             EnvEditor::setEnv('DB_PASSWORD', $request->input('database_password'));
             EnvEditor::setEnv('DB_PREFIX', $request->input('database_prefix'));
-            return redirect()->route('LaravelInstaller::install.migrations');
+            return redirect()->route('LaravelWizardInstaller::install.migrations');
         } catch (Exception $e) {
-            return view('installer::steps.database', ['values' => $request->all(), 'error' => $e->getMessage()]);
+            $values = [
+                'database_hostname' =>  $request->get("database_hostname"),
+                'database_port' =>  $request->get("database_port"),
+                'database_name' =>  $request->get("database_name"),
+                'database_username' =>  $request->get("database_username"),
+                'database_password' =>  $request->get("database_password"),
+                'database_prefix' =>  $request->get("database_prefix"),
+            ];
+            return view('installer::steps.database', ['values' => $values, 'error' => $e->getMessage()]);
         }
     }
 
@@ -82,7 +90,7 @@ class InstallDatabaseController extends Controller
             in_array(false, (new InstallServerController())->check(), true) ||
             in_array(false, (new InstallFolderController())->check(), true)
         ) {
-            return redirect()->route('LaravelInstaller::install.database');
+            return redirect()->route('LaravelWizardInstaller::install.database');
         }
         return view('installer::steps.migrations');
     }
@@ -99,11 +107,11 @@ class InstallDatabaseController extends Controller
             in_array(false, (new InstallServerController())->check(), true) ||
             in_array(false, (new InstallFolderController())->check(), true)
         ) {
-            return redirect()->route('LaravelInstaller::install.database');
+            return redirect()->route('LaravelWizardInstaller::install.database');
         }
         try {
             Artisan::call('migrate', ['--seed' => true]);
-            return redirect()->route('LaravelInstaller::install.keys');
+            return redirect()->route('LaravelWizardInstaller::install.keys');
         } catch (Exception $e) {
             return view('installer::steps.migrations', ['error' => $e->getMessage() ?: 'An error occurred while executing migrations']);
         }

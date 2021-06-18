@@ -21,7 +21,7 @@
             </div>
         </div>
     @endif
-    <form method="post" action="{{ route('LaravelInstaller::install.setDatabase') }}">
+    <form method="post" action="{{ route('LaravelWizardInstaller::install.setDatabase') }}">
         @csrf
         <div class="mb-3">
             <label for="database_hostname" class="block font-medium leading-5 text-gray-700 pb-2">Database host <span class="text-red-400">*</span></label>

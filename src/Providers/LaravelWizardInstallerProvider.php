@@ -1,14 +1,14 @@
 <?php
 
-namespace dacoto\LaravelInstaller\Providers;
+namespace dacoto\LaravelWizardInstaller\Providers;
 
-use dacoto\LaravelInstaller\Middleware\InstallerMiddleware;
-use dacoto\LaravelInstaller\Middleware\ToInstallMiddleware;
+use dacoto\LaravelWizardInstaller\Middleware\InstallerMiddleware;
+use dacoto\LaravelWizardInstaller\Middleware\ToInstallMiddleware;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
-class LaravelDashboardInstallerProvider extends ServiceProvider
+class LaravelWizardInstallerProvider extends ServiceProvider
 {
     public function register(): void
     {

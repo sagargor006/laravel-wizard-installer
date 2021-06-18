@@ -4,5 +4,5 @@ return [
     /**
      * Server requirements
      */
-    'php' => '7.3.0',
+    'php' => '7.4.0',
 ];

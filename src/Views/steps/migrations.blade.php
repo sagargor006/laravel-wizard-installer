@@ -34,7 +34,7 @@
     @endif
     <p class="pb-3 text-gray-800">The installation of the database and the loading of all the basic data of the application will be carried out.</p>
     <p class="pb-3 text-gray-800">This may take a while, please wait and don't close the page.</p>
-    <form method="post" action="{{ route('LaravelInstaller::install.runMigrations') }}">
+    <form method="post" action="{{ route('LaravelWizardInstaller::install.runMigrations') }}">
         @csrf
         <div class="flex justify-end">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">

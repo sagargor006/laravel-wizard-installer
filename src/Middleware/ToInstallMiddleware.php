@@ -1,6 +1,6 @@
 <?php
 
-namespace dacoto\LaravelInstaller\Middleware;
+namespace dacoto\LaravelWizardInstaller\Middleware;
 
 use Closure;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +18,7 @@ class ToInstallMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!$this->alreadyInstalled() && explode('/', $request->route() ? $request->route()->uri() : '')[0] !== 'install') {
-            return redirect()->route('LaravelInstaller::install.index');
+            return redirect()->route('LaravelWizardInstaller::install.index');
         }
         return $next($request);
     }

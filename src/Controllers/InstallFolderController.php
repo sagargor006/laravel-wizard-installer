@@ -1,6 +1,6 @@
 <?php
 
-namespace dacoto\LaravelInstaller\Controllers;
+namespace dacoto\LaravelWizardInstaller\Controllers;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -19,7 +19,7 @@ class InstallFolderController extends Controller
     public function index()
     {
         if (in_array(false, (new InstallServerController())->check(), true)) {
-            return redirect()->route('LaravelInstaller::install.server');
+            return redirect()->route('LaravelWizardInstaller::install.server');
         }
         return view('installer::steps.folders', ['checks' => $this->check()]);
     }
