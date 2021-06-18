@@ -63,16 +63,18 @@ class InstallDatabaseController extends Controller
             EnvEditor::setEnv('DB_DATABASE', $request->input('database_name'));
             EnvEditor::setEnv('DB_USERNAME', $request->input('database_username'));
             EnvEditor::setEnv('DB_PASSWORD', $request->input('database_password'));
-            EnvEditor::setEnv('DB_PREFIX', $request->input('database_prefix'));
+            if ($request->input('database_prefix')) {
+                EnvEditor::setEnv('DB_PREFIX', $request->input('database_prefix'));
+            }
             return redirect()->route('LaravelWizardInstaller::install.migrations');
         } catch (Exception $e) {
             $values = [
-                'database_hostname' =>  $request->get("database_hostname"),
-                'database_port' =>  $request->get("database_port"),
-                'database_name' =>  $request->get("database_name"),
-                'database_username' =>  $request->get("database_username"),
-                'database_password' =>  $request->get("database_password"),
-                'database_prefix' =>  $request->get("database_prefix"),
+                'database_hostname' => $request->get("database_hostname"),
+                'database_port' => $request->get("database_port"),
+                'database_name' => $request->get("database_name"),
+                'database_username' => $request->get("database_username"),
+                'database_password' => $request->get("database_password"),
+                'database_prefix' => $request->get("database_prefix"),
             ];
             return view('installer::steps.database', ['values' => $values, 'error' => $e->getMessage()]);
         }
