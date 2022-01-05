@@ -6,7 +6,7 @@
         "php": "^7.4|^8.0",
         "ext-json": "*",
         "laravel/framework": "^7.0|^8.0",
-        "dacoto/laravel-setenv": "^2.1"
+        "dacoto/laravel-setenv": "^2.2"
     },
     "autoload": {
         "psr-4": {
