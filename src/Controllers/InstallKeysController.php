@@ -2,7 +2,7 @@
 
 namespace dacoto\LaravelWizardInstaller\Controllers;
 
-use dacoto\LaravelWizardInstaller\Support\EnvEditor;
+use dacoto\SetEnv\Facades\SetEnv;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -47,11 +47,12 @@ class InstallKeysController extends Controller
         }
         try {
             Artisan::call('key:generate', ['--force' => true, '--show' => true]);
-            if (empty(EnvEditor::getEnv('APP_KEY'))) {
-                EnvEditor::setEnv('APP_KEY', trim(str_replace('"', '', Artisan::output())));
+            if (empty(SetEnv::getValue('APP_KEY'))) {
+                SetEnv::setKey('APP_KEY', trim(str_replace('"', '', Artisan::output())));
+                SetEnv::save();
             }
-            Artisan::call('storage:link');
-            if (empty(EnvEditor::getEnv('APP_KEY'))) {
+            Artisan::call('storage:link', ['--force' => true]);
+            if (empty(SetEnv::getValue('APP_KEY'))) {
                 return view('installer::steps.keys', ['error' => 'The application keys could not be generated.']);
             }
             return redirect()->route('LaravelWizardInstaller::install.finish');

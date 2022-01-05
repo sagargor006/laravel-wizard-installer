@@ -2,7 +2,7 @@
 
 namespace dacoto\LaravelWizardInstaller\Controllers;
 
-use dacoto\LaravelWizardInstaller\Support\EnvEditor;
+use dacoto\SetEnv\Facades\SetEnv;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -58,14 +58,15 @@ class InstallDatabaseController extends Controller
         ]);
         try {
             DB::connection()->getPdo();
-            EnvEditor::setEnv('DB_HOST', $request->input('database_hostname'));
-            EnvEditor::setEnv('DB_PORT', $request->input('database_port'));
-            EnvEditor::setEnv('DB_DATABASE', $request->input('database_name'));
-            EnvEditor::setEnv('DB_USERNAME', $request->input('database_username'));
-            EnvEditor::setEnv('DB_PASSWORD', $request->input('database_password'));
+            SetEnv::setKey('DB_HOST', $request->input('database_hostname'));
+            SetEnv::setKey('DB_PORT', $request->input('database_port', 3306));
+            SetEnv::setKey('DB_DATABASE', $request->input('database_name'));
+            SetEnv::setKey('DB_USERNAME', $request->input('database_username'));
+            SetEnv::setKey('DB_PASSWORD', $request->input('database_password'));
             if ($request->input('database_prefix')) {
-                EnvEditor::setEnv('DB_PREFIX', $request->input('database_prefix'));
+                SetEnv::setKey('DB_PREFIX', $request->input('database_prefix'));
             }
+            SetEnv::save();
             return redirect()->route('LaravelWizardInstaller::install.migrations');
         } catch (Exception $e) {
             $values = [
@@ -112,7 +113,7 @@ class InstallDatabaseController extends Controller
             return redirect()->route('LaravelWizardInstaller::install.database');
         }
         try {
-            Artisan::call('migrate', ['--seed' => true]);
+            Artisan::call('migrate', ['--force' => true, '--seed' => true]);
             return redirect()->route('LaravelWizardInstaller::install.keys');
         } catch (Exception $e) {
             return view('installer::steps.migrations', ['error' => $e->getMessage() ?: 'An error occurred while executing migrations']);
