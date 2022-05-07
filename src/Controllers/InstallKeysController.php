@@ -55,6 +55,9 @@ class InstallKeysController extends Controller
             if (empty(SetEnv::getValue('APP_KEY'))) {
                 return view('installer::steps.keys', ['error' => 'The application keys could not be generated.']);
             }
+            foreach (config('installer.database.seeders', []) as $command) {
+                Artisan::call($command, ['--force' => true]);
+            }
             return redirect()->route('LaravelWizardInstaller::install.finish');
         } catch (Exception $e) {
             return view('installer::steps.keys', ['error' => $e->getMessage()]);
