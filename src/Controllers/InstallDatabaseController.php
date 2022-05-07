@@ -113,7 +113,7 @@ class InstallDatabaseController extends Controller
             return redirect()->route('LaravelWizardInstaller::install.database');
         }
         try {
-            Artisan::call('migrate', ['--force' => true, '--seed' => true]);
+            Artisan::call('migrate', ['--force' => true, '--seed' => config('installer.database.seeders', false)]);
             return redirect()->route('LaravelWizardInstaller::install.keys');
         } catch (Exception $e) {
             return view('installer::steps.migrations', ['error' => $e->getMessage() ?: 'An error occurred while executing migrations']);
