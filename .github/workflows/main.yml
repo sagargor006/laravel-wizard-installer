@@ -1,6 +1,6 @@
 name: CI
 
-on: [push]
+on: [ push ]
 
 jobs:
   build:
@@ -9,5 +9,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: PHP 7.3 Syntax Checker
-        uses: StephaneBour/actions-php-lint@7.3
+      - name: PHP 8.0 Syntax Checker
+        uses: StephaneBour/actions-php-lint@8.0
