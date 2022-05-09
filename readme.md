@@ -8,10 +8,10 @@ A Laravel wizard installer package for Laravel 9.x and higher.
 
 ## Installation
 
-Require this package in your composer.json and run composer update (or run `dacoto/laravel-wizard-installer` directly):
+Require this package:
 
 ```
-dacoto/laravel-wizard-installer
+composer require dacoto/laravel-wizard-installer
 ```
 
 You need to publish the config file for this package. This will add the file `config/installer.php`, where you can configure this package.
