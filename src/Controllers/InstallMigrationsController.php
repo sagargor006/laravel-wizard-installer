@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 
-class InstallKeysController extends Controller
+class InstallMigrationsController extends Controller
 {
     public function __invoke(): View|Factory|Application|RedirectResponse
     {
@@ -21,6 +21,6 @@ class InstallKeysController extends Controller
             return redirect()->route('LaravelWizardInstaller::install.database');
         }
 
-        return view('installer::steps.keys');
+        return view('installer::steps.migrations');
     }
 }
