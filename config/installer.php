@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\File;
 
 return [
+    'icon' => '/images/default/icon.png',
+
+    'background' => '/images/default/background.jpg',
+
     'support_url' => 'https://help.dacoto.com/',
 
     'server' => [
