@@ -7,7 +7,7 @@
     "ext-pdo": "*",
     "ext-json": "*",
     "laravel/framework": "^12.0",
-    "dacoto/laravel-setenv": "^2.2"
+    "dacoto/laravel-env-set": "^2.1"
   },
   "autoload": {
     "psr-4": {
